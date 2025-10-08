@@ -9,6 +9,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 body h1 {
@@ -61,4 +62,50 @@ body h1 {
 .popUp p {
     font-size: 30px;
     margin-bottom: 20px;
+}
+
+.loading {
+    max-width: 880px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 55px 0;
+}
+
+.loading::before {
+    display: block;
+    content: "";
+    width: 50px;
+    height: 50px;
+    border: 10px solid #dbdbdb;
+    border-radius: 50%;
+    border-top-color: transparent; 
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+.loading::after {
+    content: "carregando a api...";
+    margin-top: 25px;
+    animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+@keyframes dots {
+    0%   { content: "carregando a api"; }
+    16%  { content: "carregando a api."; }
+    33%  { content: "carregando a api.."; }
+    50%  { content: "carregando a api..."; }
+    66%  { content: "carregando a api.."; }
+    83%  { content: "carregando a api."; }
+    100%   { content: "carregando a api"; }
 }

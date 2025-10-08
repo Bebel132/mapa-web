@@ -28,20 +28,40 @@ const mapa = [
   ["svgs/tocantins.svg", 391.25, 174.1]
 ];
 
+const mapaSvg = document.querySelector("#mapa");
+const loadingEl = document.querySelector(".loading"); 
+const popUp = document.querySelector(".popUp");
+let loading = false;
 let mapaDados = null;
 
 async function carregaDados() {
-  const response = await fetch('https://mapa-api.onrender.com/estados/');
-  mapaDados = await response.json();
+  try {
+    loading = true;
+    loadingEl.style.display = "flex"; // mostra o loading
+    mapaSvg.style.display = "none";
+    popUp.style.display = "none";
+
+    const response = await fetch('https://mapa-api.onrender.com/estados/');
+    mapaDados = await response.json();
+
+  } catch (err) {
+    console.error("Erro ao carregar dados:", err);
+  } finally {
+    loading = false;
+  }
+
+  loadingEl.style.display = "none";
+  mapaSvg.style.display = "block";
+  popUp.style.display = "block";
 }
 
-const mapaSvg = document.querySelector("#mapa");
 
 const lookup = {};
 mapa.forEach(([url, x, y]) => {
   const nome = url.match(/svgs\/(.*)\.svg/)[1];
   lookup[nome.toLowerCase()] = { url, x, y };
 });
+
 
 carregaDados().then(() => {
   mapaDados.forEach(async d => {
@@ -85,14 +105,14 @@ carregaDados().then(() => {
     });
 
     g.addEventListener("click", () => {
-      document.querySelector(".popUp").style.visibility = "visible"
+      popUp.style.visibility = "visible"
 
       document.querySelectorAll(".ativo").forEach(a => {
         a.classList.remove("ativo");
       });
 
-      document.querySelector(".popUp").children[1].textContent = d.estado;
-      document.querySelector(".popUp").children[3].textContent = d.porcentagem;
+      popUp.children[1].textContent = d.estado;
+      popUp.children[3].textContent = d.porcentagem;
 
       g.querySelectorAll("path").forEach(path => {path.classList.add("ativo")});
     });
