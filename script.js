@@ -42,6 +42,7 @@ async function carregaDados() {
     popUp.style.display = "none";
 
     const response = await fetch('https://mapa-api.onrender.com/estados/');
+    //const response = await fetch('http://127.0.0.1:10000/estados');
     mapaDados = await response.json();
 
   } catch (err) {
@@ -112,7 +113,11 @@ carregaDados().then(() => {
       });
 
       popUp.children[1].textContent = d.estado;
-      popUp.children[3].textContent = d.porcentagem;
+      popUp.children[3].textContent = d.area.toString().replace('.', ',') + "kmˆ2";
+      popUp.children[5].textContent = d.pessoas + " pessoas";
+      popUp.children[7].textContent = `${d.porcentagem}, isso é ${parseInt((parseFloat(d.porcentagem.replace('%', ''))*d.pessoas)/100)} pessoas tem acesso a internet`;
+      popUp.children[9].textContent = d.densidade + " pessoas por kmˆ2";
+      console.log(d.area)
 
       g.querySelectorAll("path").forEach(path => {path.classList.add("ativo")});
     });
