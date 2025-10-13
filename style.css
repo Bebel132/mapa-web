@@ -47,14 +47,52 @@ body {
   stroke-width: 1;
 }
 
-#mapa path.hover {
-  fill: #ffb731;
+g.Norte {
+  fill: #009C3B;
+}
+
+g.Norte:hover, g.Norte .ativo {
+  fill: #005f24;
+}
+
+g.Nordeste {
+  fill: #f39e00;
+}
+
+g.Nordeste:hover, g.Nordeste .ativo {
+  fill: #b67600;
+}
+
+g.Centro-Oeste {
+  fill: #e2db13;
+}
+
+g.Centro-Oeste:hover, g.Centro-Oeste .ativo {
+  fill: #a59f00;
+}
+
+g.Sudeste {
+  fill: #1E90FF;
+}
+
+g.Sudeste:hover, g.Sudeste .ativo {
+  fill: #1668b9;
+}
+
+g.Sul {
+  fill: #a059e2;
+}
+
+g.Sul:hover, g.Sul .ativo {
+  fill: #6e3d9b;
+}
+
+path.hover {
   cursor: pointer;
   transition: fill 0.3s, transform 0.3s;
 }
 
 .ativo {
-  fill: #ff6600;
   cursor: default;
 }
 
@@ -97,7 +135,7 @@ body {
   content: "";
   width: 50px;
   height: 50px;
-  border: 10px solid #dbdbdb;
+  border: 10px solid #000000;
   border-radius: 50%;
   border-top-color: transparent;
   animation: spin 1s linear infinite;

@@ -1,31 +1,35 @@
 const mapa = [
-  ["svgs/acre.svg", 0, 206.84],
-  ["svgs/alagoas.svg", 600.27, 235.64],
-  ["svgs/amapa.svg", 322.38, 13.88],
-  ["svgs/amazonas.svg", 3.55, 50.65],
-  ["svgs/bahia.svg", 460.85, 230.66],
-  ["svgs/ceara.svg", 546.95, 134.34],
-  ["svgs/distrito_federal.svg", 431.81, 349.26],
-  ["svgs/espirito_santo.svg", 539.08, 390.77],
-  ["svgs/goias.svg", 348.63, 296.22],
-  ["svgs/maranhao.svg", 423.95, 105.35],
-  ["svgs/mato_grosso.svg", 208.12, 210.54],
-  ["svgs/mato_grosso_do_sul.svg", 265.97, 378.93],
-  ["svgs/minas_gerais.svg", 385.88, 327.67],
-  ["svgs/para.svg", 252.3, 44.51],
-  ["svgs/paraiba.svg", 592.32, 188.52],
-  ["svgs/parana.svg", 325.52, 473.61],
-  ["svgs/pernambuco.svg", 547.71, 209.39],
-  ["svgs/piaui.svg", 470.42, 133.68],
-  ["svgs/rio_de_janeiro.svg", 489.23, 442.1],
-  ["svgs/rio_grande_do_norte.svg", 593.94, 168.52],
-  ["svgs/rio_grande_do_sul.svg", 275.41, 557.02],
-  ["svgs/rondonia.svg", 120.53, 221.54],
-  ["svgs/roraima.svg", 154.48, 0],
-  ["svgs/santa_catarina.svg", 338.55, 536.44],
-  ["svgs/sao_paulo.svg", 349.79, 424.76],
-  ["svgs/sergipe.svg", 600.01, 247.39],
-  ["svgs/tocantins.svg", 391.25, 174.1]
+  ["svgs/acre.svg", 0, 206.84, "Norte"],
+  ["svgs/amapa.svg", 322.38, 13.88, "Norte"],
+  ["svgs/amazonas.svg", 3.55, 50.65, "Norte"],
+  ["svgs/para.svg", 252.3, 44.51, "Norte"],
+  ["svgs/rondonia.svg", 120.53, 221.54, "Norte"],
+  ["svgs/roraima.svg", 154.48, 0, "Norte"],
+  ["svgs/tocantins.svg", 391.25, 174.1, "Norte"],
+
+  ["svgs/alagoas.svg", 600.27, 235.64, "Nordeste"],
+  ["svgs/bahia.svg", 460.85, 230.66, "Nordeste"],
+  ["svgs/ceara.svg", 546.95, 134.34, "Nordeste"],
+  ["svgs/maranhao.svg", 423.95, 105.35, "Nordeste"],
+  ["svgs/paraiba.svg", 592.32, 188.52, "Nordeste"],
+  ["svgs/pernambuco.svg", 547.71, 209.39, "Nordeste"],
+  ["svgs/piaui.svg", 470.42, 133.68, "Nordeste"],
+  ["svgs/rio_grande_do_norte.svg", 593.94, 168.52, "Nordeste"],
+  ["svgs/sergipe.svg", 600.01, 247.39, "Nordeste"],
+
+  ["svgs/distrito_federal.svg", 431.81, 349.26, "Centro-Oeste"],
+  ["svgs/goias.svg", 348.63, 296.22, "Centro-Oeste"],
+  ["svgs/mato_grosso.svg", 208.12, 210.54, "Centro-Oeste"],
+  ["svgs/mato_grosso_do_sul.svg", 265.97, 378.93, "Centro-Oeste"],
+
+  ["svgs/espirito_santo.svg", 539.08, 390.77, "Sudeste"],
+  ["svgs/minas_gerais.svg", 385.88, 327.67, "Sudeste"],
+  ["svgs/rio_de_janeiro.svg", 489.23, 442.1, "Sudeste"],
+  ["svgs/sao_paulo.svg", 349.79, 424.76, "Sudeste"],
+
+  ["svgs/parana.svg", 325.52, 473.61, "Sul"],
+  ["svgs/rio_grande_do_sul.svg", 275.41, 557.02, "Sul"],
+  ["svgs/santa_catarina.svg", 338.55, 536.44, "Sul"]
 ];
 
 const mapaSvg = document.querySelector("#mapa");
@@ -58,9 +62,9 @@ async function carregaDados() {
 
 
 const lookup = {};
-mapa.forEach(([url, x, y]) => {
+mapa.forEach(([url, x, y, regiao,]) => {
   const nome = url.match(/svgs\/(.*)\.svg/)[1];
-  lookup[nome.toLowerCase()] = { url, x, y };
+  lookup[nome.toLowerCase()] = { url, x, y, regiao };
 });
 
 
@@ -76,6 +80,7 @@ carregaDados().then(() => {
       d.url = lookup[key].url;
       d.x = lookup[key].x;
       d.y = lookup[key].y;
+      d.regiao = lookup[key].regiao
     } else {
       console.warn("Não encontrado:", key);
     }
@@ -87,6 +92,7 @@ carregaDados().then(() => {
 
     const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
     g.id = d.url.replace("svgs/", "").replace(".svg", "");
+    g.classList.add(d.regiao)
     g.setAttribute("transform", `translate(${d.x}, ${d.y})`);
 
     svgDoc.querySelectorAll("path").forEach(path => {
