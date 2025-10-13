@@ -177,6 +177,7 @@ body {
 
 @media screen and (max-width: 600px) {
   .content,
+  .loading,
   h1 {
     display: none;
   }
