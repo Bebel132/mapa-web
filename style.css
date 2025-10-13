@@ -5,27 +5,40 @@
 }
 
 body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e9e9e9;
 }
 
-body h1 {
-    margin-top: 50px;
-    text-align: center;
+#titulo {
+  margin-top: 50px;
+  text-align: center;
+  border: 3px solid #000;
+  border-radius: 5px;
+  padding: 8px;
+  background-color: #fff;
 }
 
 .content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
   position: relative;
   width: fit-content;
+}
+
+.acessoCelular {
+  display: none;
+}
+
+#mapa {
+  width: 650px;
 }
 
 #mapa path {
@@ -40,56 +53,60 @@ body h1 {
 }
 
 .ativo {
-    fill: #ff6600;
-    cursor: default;
+  fill: #ff6600;
+  cursor: default;
 }
 
 .popUp {
-    visibility: hidden;
-    margin-left: 50px;
+  visibility: hidden;
+  margin-left: 50px;
+  border: 3px solid #000;
+  border-radius: 5px;
+  padding: 8px;
+  background-color: #fff;
 }
 
 .popUp h1 {
-    margin: 0;
-    text-align: left;
-    font-size: 50px;
+  margin: 0;
+  text-align: left;
+  font-size: 50px;
 }
 
 .popUp h2 {
-    font-size: 40px;
+  font-size: 40px;
 }
 
 .popUp p {
-    font-size: 30px;
-    margin-bottom: 20px;
+  font-size: 30px;
+  margin-bottom: 20px;
 }
 
 .loading {
-    max-width: 880px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 55px 0;
+  max-width: 880px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 55px 0;
 }
 
 .loading::before {
-    display: block;
-    content: "";
-    width: 50px;
-    height: 50px;
-    border: 10px solid #dbdbdb;
-    border-radius: 50%;
-    border-top-color: transparent; 
-    animation: spin 1s linear infinite;
-    margin: 0 auto;
+  display: block;
+  content: "";
+  width: 50px;
+  height: 50px;
+  border: 10px solid #dbdbdb;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
 }
 
 .loading::after {
-    content: "carregando a api...";
-    margin-top: 25px;
-    animation: dots 1.5s steps(4, end) infinite;
+  content: "carregando a api...";
+  margin-top: 25px;
+  animation: dots 1.5s steps(4, end) infinite;
 }
 
 @keyframes spin {
@@ -98,14 +115,75 @@ body h1 {
   }
 }
 
-
-
 @keyframes dots {
-    0%   { content: "carregando a api"; }
-    16%  { content: "carregando a api."; }
-    33%  { content: "carregando a api.."; }
-    50%  { content: "carregando a api..."; }
-    66%  { content: "carregando a api.."; }
-    83%  { content: "carregando a api."; }
-    100%   { content: "carregando a api"; }
+  0% {
+    content: "carregando a api";
+  }
+  16% {
+    content: "carregando a api.";
+  }
+  33% {
+    content: "carregando a api..";
+  }
+  50% {
+    content: "carregando a api...";
+  }
+  66% {
+    content: "carregando a api..";
+  }
+  83% {
+    content: "carregando a api.";
+  }
+  100% {
+    content: "carregando a api";
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  #mapa {
+    width: 500px;
+  }
+
+  .popUp h1 {
+    font-size: 40px;
+  }
+
+  .popUp h2 {
+    font-size: 30px;
+  }
+
+  .popUp p {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #mapa {
+    width: 300px;
+  }
+
+  .popUp h1 {
+    font-size: 35px;
+  }
+
+  .popUp h2 {
+    font-size: 25px;
+  }
+
+  .popUp p {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .content,
+  h1 {
+    display: none;
+  }
+
+  .acessoCelular {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+  }
 }

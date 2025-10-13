@@ -113,10 +113,10 @@ carregaDados().then(() => {
       });
 
       popUp.children[1].textContent = d.estado;
-      popUp.children[3].textContent = d.area.toString().replace('.', ',') + "kmˆ2";
+      popUp.children[3].textContent = d.area.toString().replace('.', ',') + "km²";
       popUp.children[5].textContent = d.pessoas + " pessoas";
       popUp.children[7].textContent = `${d.porcentagem}, isso é ${parseInt((parseFloat(d.porcentagem.replace('%', ''))*d.pessoas)/100)} pessoas tem acesso a internet`;
-      popUp.children[9].textContent = d.densidade + " pessoas por kmˆ2";
+      popUp.children[9].textContent = d.densidade + " pessoas por km2";
       console.log(d.area)
 
       g.querySelectorAll("path").forEach(path => {path.classList.add("ativo")});

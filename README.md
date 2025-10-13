@@ -1,0 +1,2 @@
+# Infográfico Interativo: Acesso à Internet no Brasil
+Este projeto apresenta um infográfico interativo que detalha o acesso à internet em cada estado brasileiro. Através de um mapa dinâmico, o usuário pode clicar em qualquer estado para visualizar dados relevantes sobre conectividade e demografia.
