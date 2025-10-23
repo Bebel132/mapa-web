@@ -35,6 +35,7 @@ const mapa = [
 const mapaSvg = document.querySelector("#mapa");
 const loadingEl = document.querySelector(".loading"); 
 const popUp = document.querySelector(".popUp");
+const content = document.querySelector(".content");
 let loading = false;
 let mapaDados = null;
 
@@ -119,11 +120,10 @@ carregaDados().then(() => {
       });
 
       popUp.children[1].textContent = d.estado;
-      popUp.children[3].textContent = d.area.toString().replace('.', ',') + "km²";
-      popUp.children[5].textContent = d.pessoas + " pessoas";
-      popUp.children[7].textContent = `${d.porcentagem}, isto é ${parseInt((parseFloat(d.porcentagem.replace('%', ''))*d.pessoas)/100)} pessoas tem acesso a internet`;
+      popUp.children[3].textContent = d.area.toLocaleString('pt-br') + "km²";
+      popUp.children[5].textContent = d.pessoas.toLocaleString('pt-br') + " pessoas";
+      popUp.children[7].textContent = `${d.porcentagem}, isto é ${parseInt((parseFloat(d.porcentagem.replace('%', ''))*d.pessoas)/100).toLocaleString('pt-br')} pessoas tem acesso a internet`;
       popUp.children[9].textContent = d.densidade + " pessoas por km²";
-      console.log(d.area)
 
       g.querySelectorAll("path").forEach(path => {path.classList.add("ativo")});
     });
