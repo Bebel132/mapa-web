@@ -36,8 +36,11 @@ const mapaSvg = document.querySelector("#mapa");
 const loadingEl = document.querySelector(".loading"); 
 const popUp = document.querySelector(".popUp");
 const content = document.querySelector(".content");
+const GIST_ID = 'c695194f270beb73384b82b9efc7ee90';
+const GIST_URL = `https://gist.githubusercontent.com/Bebel132/${GIST_ID}/raw/pirambu-api.json`;
 let loading = false;
 let mapaDados = null;
+let API_URL = '';
 
 async function carregaDados() {
   try {
@@ -45,8 +48,6 @@ async function carregaDados() {
     loadingEl.style.display = "flex"; // mostra o loading
     mapaSvg.style.display = "none";
     popUp.style.display = "none";
-
-    let API_URL = '';
 
     try {
         API_URL = await fetch(`${GIST_URL}?t=${Date.now()}`).then(res => res.json()).then(data => data.api_url+"");
