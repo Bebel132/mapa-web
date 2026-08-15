@@ -56,7 +56,7 @@ async function carregaDados() {
         API_URL = 'http://localhost:5000';
     }
 
-    const response = await fetch(API_URL'/estados/');
+    const response = await fetch(API_URL+'/estados/');
     //const response = await fetch('http://127.0.0.1:10000/estados');
     mapaDados = await response.json();
 
