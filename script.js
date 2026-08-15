@@ -46,7 +46,17 @@ async function carregaDados() {
     mapaSvg.style.display = "none";
     popUp.style.display = "none";
 
-    const response = await fetch('https://mapa-api.onrender.com/estados/');
+    let API_URL = '';
+
+    try {
+        API_URL = await fetch(`${GIST_URL}?t=${Date.now()}`).then(res => res.json()).then(data => data.api_url+"");
+    } catch (error) {
+        console.error('Erro ao carregar API URL:', error);
+        // Fallback para desenvolvimento
+        API_URL = 'http://localhost:5000';
+    }
+
+    const response = await fetch(API_URL'/estados/');
     //const response = await fetch('http://127.0.0.1:10000/estados');
     mapaDados = await response.json();
 
