@@ -1,30 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa do Brasil</title>
+    <title>Mapa do Brasil - Acesso à Internet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="acessoCelular">Infelizmente, o infográfico não é compativel a dispositivos com tamanhos de tela inferiores a 600px</div>
+    <div class="acesso-celular">Infelizmente, o infográfico não é compatível com dispositivos de largura de tela inferiores a 845px.</div>
     <div class="loading"></div>
     <div class="content">
-        <h1 id="titulo">Acesso à Internet</h1>
+        <h1 id="titulo">Mapa de Acesso à Internet no Brasil</h1>
         <div class="container">
             <svg id="mapa" viewBox="0 0 660 690"></svg>
         </div>
         <div class="popUp">
-            <h1>Estado:</h1>
-            <p></p>
-            <h2>Área:</h2>
-            <p></p>
-            <h2>População:</h2>
-            <p></p>
-            <h2>Porcentagem:</h2>
-            <p></p>
-            <h2>Densidade demográfica:</h2>
-            <p></p>
+            <h1 id="pop-estado"></h1>
+            <div class="flex" style="gap: 24px;">
+                <div class="flex">
+                    <span class="material-symbols-outlined">map</span>
+                    <div>
+                        <h2>Área:</h2>
+                        <p id="pop-area"></p>
+                    </div>
+                </div>
+                <div class="flex">
+                    <span class="material-symbols-outlined">groups</span>
+                    <div>
+                        <h2>População:</h2>
+                        <p id="pop-populacao"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex">
+                <span class="material-symbols-outlined">cell_tower</span>
+                <div>
+                    <h2>Acesso à Internet:</h2>
+                    <div class="progress-wrapper">
+                        <div class="progress-container">
+                            <div id="pop-barra" class="progress-fill"></div>
+                        </div>
+                        <span id="pop-porcentagem-texto" class="texto-destaque"></span>
+                    </div>
+                    <p id="pop-equivalencia" class="texto-secundario"></p>
+                </div>
+            </div>
+            <div class="flex">
+                <span class="material-symbols-outlined">demography</span>
+                <div>
+                    <h2>Densidade demográfica:</h2>
+                    <p id="pop-densidade"></p>
+                </div>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
