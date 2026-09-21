@@ -210,6 +210,6 @@ path.hover {
 }
 
 @media screen and (max-width: 845px) {
-    .content, .loading, h1 { display: none; }
+    .content, .loading, #titulo { display: none; }
     .acesso-celular { display: block; text-align: center; font-weight: bold; padding: 20px; }
 }
