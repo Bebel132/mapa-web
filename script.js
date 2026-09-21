@@ -1,5 +1,6 @@
 const mapaSvg = document.querySelector("#mapa");
 const loadingEl = document.querySelector(".loading"); 
+const indisponivelEl = document.querySelector(".indisponivel");
 const popUp = document.querySelector(".popUp");
 const content = document.querySelector(".content");
 
@@ -64,23 +65,30 @@ async function carregaDados() {
         popUp.style.display = "none";
 
         try {
-            const data = await fetch(`${GIST_URL}?t=${Date.now()}`).then(res => res.json());
-            API_URL = data.api_url + "";
+            const gistResponse = await fetch(`${GIST_URL}?t=${Date.now()}`);
+            if (!gistResponse.ok) throw new Error(`Gist respondeu com status ${gistResponse.status}`);
+
+            const data = await gistResponse.json();
+            API_URL = String(data.api_url || '').trim().replace(/\/$/, '');
+            if (!API_URL) throw new Error('A URL da API não foi encontrada');
         } catch (error) {
             console.error('Erro ao carregar API URL:', error);
-            API_URL = 'http://localhost:5000'; // Fallback
+            throw error;
         }
 
         const response = await fetch(API_URL + '/estados/');
+        if (!response.ok) throw new Error(`API respondeu com status ${response.status}`);
         mapaDados = await response.json();
+        return true;
 
     } catch (err) {
         console.error("Erro ao carregar dados:", err);
+        mapaDados = null;
+        indisponivelEl.hidden = false;
+        return false;
     } finally {
         loading = false;
         loadingEl.style.display = "none";
-        mapaSvg.style.display = "block";
-        popUp.style.display = "block";
     }
 }
 
@@ -101,7 +109,11 @@ function preencherPopUp(dadosEstado) {
     document.getElementById("pop-densidade").textContent = dadosEstado.densidade + " pessoas por km²";
 }
 
-carregaDados().then(() => {
+carregaDados().then((dadosCarregados) => {
+    if (!dadosCarregados) return;
+
+    mapaSvg.style.display = "block";
+    popUp.style.display = "block";
     mapaDados.forEach(async d => {
         const key = d.estado
             .toLowerCase()
